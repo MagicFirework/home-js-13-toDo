@@ -10,7 +10,7 @@ const toDoData = JSON.parse(localStorage.getItem("note")) || [];
 const render = () => {
   todoList.innerHTML = "";
   todoCompleted.innerHTML = "";
-  toDoData.forEach((item) => {
+  toDoData.forEach((item, index) => {
     const li = document.createElement("li");
     li.classList.add("todo-item");
     li.innerHTML =
@@ -34,11 +34,7 @@ const render = () => {
       render();
     });
 
-    li.querySelector(".todo-remove").addEventListener("click", (e) => {
-      const searchName =
-        e.target.parentNode.parentNode.querySelector("span").textContent;
-      const index = toDoData.findIndex((elem) => elem.text === searchName);
-
+    li.querySelector(".todo-remove").addEventListener("click", () => {
       toDoData.splice(index, 1);
       localStorage.setItem("note", JSON.stringify(toDoData));
       render();
